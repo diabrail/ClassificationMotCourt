@@ -4,7 +4,8 @@ from representation_donnees.representation import TextRepresentation  # Importez
 
 app = Flask(__name__)
 classifier = TextClassifier()  # Initialisez votre modèle ici
-representation = TextRepresentation()  # Initialisez votre classe TextRepresentation si nécessaire
+representation = TextRepresentation("New #Africa #news Egypt hosts next China-Africa Summit: Chinese officials.. http://bit.ly/9qEYG on #African #society")  # Initialisez votre classe TextRepresentation si nécessaire
+
 
 @app.route('/')
 def index():
@@ -24,7 +25,7 @@ def classify():
         # Classification du tweet
         result = classifier.classify(tweet_tfidf)  # Méthode à implémenter dans votre classe TextClassifier
 
-        return render_template('result.html', tweet=tweet, result=result)
+        return render_template('index.html', tweet=tweet, result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
