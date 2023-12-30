@@ -1,35 +1,24 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.naive_bayes import MultinomialNB
+
 
 class TextClassifier:
-    def __init__(self, X_train, X_validation, X_test, y_train, y_validation, y_test):
+    def __init__(self, X_train=None, X_validation=None, X_test=None, y_train=None, y_validation=None, y_test=None):
         self.X_train = X_train
         self.X_validation = X_validation
         self.X_test = X_test
         self.y_train = y_train
         self.y_validation = y_validation
         self.y_test = y_test
-        self.vectorizer = TfidfVectorizer()
         self.classifier = MultinomialNB()
 
-    def train_classifier(self):
-        # Initialiser un classificateur Naive Bayes
-        classifier = MultinomialNB()
-
-        # Entraîner le classificateur sur les données d'entraînement
-        classifier.fit(self.X_train, self.y_train)
-
-        return classifier
-
     def train_classifier(self, X_train, y_train):
-        # Entraînez votre classificateur avec les données d'entraînement
-        X_train_tfidf = self.vectorizer.fit_transform(X_train)
-        self.classifier.fit(X_train_tfidf, y_train)
+        # Entraîner le classificateur sur les données d'entraînement
+        self.classifier.fit(X_train, y_train)
 
-    def evaluate_classifier(self, classifier, X, y, set_name):
+    def evaluate_classifier(self, X, y, set_name):
         # Prédire les labels sur les données
-        y_pred = classifier.predict(X)
+        y_pred = self.classifier.predict(X)
 
         # Évaluer la performance du modèle
         accuracy = accuracy_score(y, y_pred)

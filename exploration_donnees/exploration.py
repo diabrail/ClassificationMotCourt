@@ -22,17 +22,7 @@ class DataExplorer:
         # Longueur des tweets
         self.df['Tweet_Length'] = self.df['Text'].apply(len)
 
-        # Répartition de la longueur des tweets
-        print("----------Répartition de la longueur des tweets----------------")
-        plt.figure(figsize=(10, 6))
-        sns.histplot(self.df, x='Tweet_Length', hue='Label', bins=30, kde=True, multiple="stack")
-        plt.title('Répartition de la longueur des tweets par classe')
-        plt.xlabel('Longueur du tweet')
-        plt.ylabel('Fréquence')
-        plt.show()
 
     def get_explored_data(self):
         # Renvoie le DataFrame exploré
         return self.df
-
-

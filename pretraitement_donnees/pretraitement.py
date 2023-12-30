@@ -20,12 +20,12 @@ class DataPreprocessor:
         df['Tokenized_Text'] = df['Cleaned_Text'].apply(self.tokenize_text)
 
         # Réduction des mots à leur forme de base (utilisation du stemming)
-        df['Stemmed_Text'] = df['Tokenized_Text'].apply(self.stem_text)
+        #df['Stemmed_Text'] = df['Tokenized_Text'].apply(self.stem_text)
 
         # Réduction des mots à leur forme de base (utilisation de la lemmatisation)
-        #df['Lemmatized_Text'] = df['Tokenized_Text'].apply(self.lemmatize_text)
+        df['Lemmatized_Text'] = df['Tokenized_Text'].apply(self.lemmatize_text)
 
-        return df[['Text', 'Label', 'Cleaned_Text', 'Tokenized_Text', 'Stemmed_Text', 'Lemmatized_Text']]
+        return df[['Text', 'Label', 'Cleaned_Text', 'Tokenized_Text', 'Lemmatized_Text']]
 
     def clean_tweet(self, text):
         # Supprimer les mentions

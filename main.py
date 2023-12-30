@@ -1,5 +1,5 @@
 # This is a sample Python script.
-
+import nltk
 # Press Maj+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
@@ -36,22 +36,22 @@ if __name__ == '__main__':
     explored_data = explorer.get_explored_data().copy()
 
     # Prétraitement des données
+    nltk.download('punkt')
     print("------------ Prétraitement des données ---------------")
     preprocessor = DataPreprocessor(filename=local_filename)
     preprocessed_data = preprocessor.preprocess_data()
 
+    print("------------ Afficher les premières lignes du DataFrame résultant ---------------")
     # Afficher les premières lignes du DataFrame résultant
-    print(preprocessed_data.head())
+    #print(preprocessed_data.head())
 
     # Utilisation de la classe TextRepresentation
+    print("------------ classe TextRepresentation ---------------")
     representation = TextRepresentation(df=preprocessed_data)
+    print("------------ Afficher TextRepresentation---------------")
     X_train_tfidf, X_test_tfidf, y_train, y_test = representation.tfidf_representation()
-
-    # Afficher la forme des vecteurs TF-IDF
-    print("Shape of X_train_tfidf:", X_train_tfidf.shape)
-    print("Shape of X_test_tfidf:", X_test_tfidf.shape)
-
     # Utilisation de la classe DataSplitter
+
     splitter = DataSplitter(X=X_train_tfidf, y=y_train)
     X_train, X_val, X_test, y_train, y_val, y_test = splitter.split_data()
 
@@ -59,25 +59,27 @@ if __name__ == '__main__':
     print("Shape of X_train:", X_train.shape)
     print("Shape of X_val:", X_val.shape)
     print("Shape of X_test:", X_test.shape)
+    print("----------------------TextClassifier -------------------------")
+    classifier = TextClassifier(X_train, X_val, X_test, y_train, y_val, y_test)
+    print("----------------------Entrainement TextClassifier -------------------------")
+    classifier.train_classifier(classifier.X_train, classifier.y_train)
 
-    # Utilisation de la classe TextClassifier
-    #classifier = TextClassifier(X_train_tfidf, X_validation_tfidf, X_test_tfidf, y_train, y_validation, y_test)
-    classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
 
-    # Entraîner le classificateur
-    trained_classifier = classifier.train_classifier()
 
     # Évaluer le classificateur sur l'ensemble d'entraînement
-    classifier.evaluate_classifier(trained_classifier, X_train_tfidf, y_train, "d'entraînement")
+    print("----------------------Évaluer le classificateur sur l'ensemble d'entraînement -------------------------")
+    classifier.evaluate_classifier(classifier.X_train, y_train, "d'entraînement")
 
     # Évaluer le classificateur sur l'ensemble de validation
-    classifier.evaluate_classifier(trained_classifier, X_val, y_val, "de validation")
+    print("----------------------Évaluer le classificateur sur l'ensemble de validation -------------------------")
+    #classifier.evaluate_classifier(classifier, classifier.X_validation, classifier.y_validation, "de validation")
 
     # Évaluer le classificateur sur l'ensemble de test
-    classifier.evaluate_classifier(trained_classifier, X_test_tfidf, y_test, "de test")
+    print("----------------------Évaluer le classificateur sur l'ensemble de test -------------------------")
+    classifier.evaluate_classifier(classifier.X_test, classifier.y_test, "de test")
 
     # Utilisation de la classe TextClassifier pour entraîner le modèle
-    classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
+    #classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
 
     # Ajustement des hyperparamètres sur l'ensemble de validation
     alphas = [0.1, 0.5, 1.0, 1.5, 2.0]  # Vous pouvez ajuster cette liste d'hyperparamètres
