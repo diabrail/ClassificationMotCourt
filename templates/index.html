@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -12,12 +13,14 @@
     <div class="page">
         <div class="row ">
             <div class="col-12 col-lg-6  parti-gauche">
-                <div class="formulaire">
-                    <label for="nom">Tweete  :</label>
-                    <textarea  type="text" id="nom" name="nom" rows="10" placeholder="Entrez votre Tweete ici"></textarea>
-                    <button class="btn-verifier" onclick="toggleApolitique()">Verifier le texte</button>
 
-                </div>
+                <form action="/classify" method="post" class="formulaire">
+                    <label for="tweet">Tweete  :</label>
+                    <textarea  type="text" id="tweet" name="tweet" rows="10" placeholder="Entrez votre Tweete ici" required></textarea>
+                    <button type="submit" class="btn-verifier" onclick="toggleApolitique()">Verifier le texte</button>
+                </form>
+
+
                 
             </div>
             <div class="col-12 col-lg-6 parti-gauche">
