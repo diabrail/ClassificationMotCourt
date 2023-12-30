@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request
-from model_naive_bayes.naive_bayes import * # Assurez-vous que le chemin est correct
-from representation_donnees.representation import TextRepresentation  # Importez la classe TextRepresentation si nécessaire
+from model_naive_bayes.naive_bayes import TextClassifier
+from representation_donnees.representation import TextRepresentation
+from pretraitement_donnees.pretraitement import DataPreprocessor
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 app = Flask(__name__)
-classifier = TextClassifier()  # Initialisez votre modèle ici
-representation = TextRepresentation("New #Africa #news Egypt hosts next China-Africa Summit: Chinese officials.. http://bit.ly/9qEYG on #African #society")  # Initialisez votre classe TextRepresentation si nécessaire
-
+classifier = TextClassifier()
+representation = TextRepresentation()
+preprocessor = DataPreprocessor(filename=None)
+tfidf_vectorizer = TfidfVectorizer()
 
 @app.route('/')
 def index():
@@ -16,14 +19,16 @@ def classify():
     if request.method == 'POST':
         tweet = request.form['tweet']
 
-        # Prétraitement du tweet (si nécessaire)
-        preprocessed_tweet = representation.preprocess_text(tweet)
+        # Prétraitement du tweet
+        preprocessed_tweet = preprocessor.clean_tweet(tweet)
+        preprocessed_tweet = preprocessor.tokenize_text(preprocessed_tweet)
+        preprocessed_tweet = preprocessor.lemmatize_text(preprocessed_tweet)
 
         # Représentation du tweet en vecteur TF-IDF
-        tweet_tfidf = representation.transform_text_to_tfidf(preprocessed_tweet)
+        tweet_tfidf = tfidf_vectorizer.transform([preprocessed_tweet])
 
         # Classification du tweet
-        result = classifier.classify(tweet_tfidf)  # Méthode à implémenter dans votre classe TextClassifier
+        result = classifier.classify(tweet_tfidf)
 
         return render_template('index.html', tweet=tweet, result=result)
 

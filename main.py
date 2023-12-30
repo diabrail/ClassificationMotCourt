@@ -37,6 +37,8 @@ if __name__ == '__main__':
 
     # Prétraitement des données
     nltk.download('punkt')
+    nltk.download('stopwords')
+
     print("------------ Prétraitement des données ---------------")
     preprocessor = DataPreprocessor(filename=local_filename)
     preprocessed_data = preprocessor.preprocess_data()
@@ -79,7 +81,7 @@ if __name__ == '__main__':
     classifier.evaluate_classifier(classifier.X_test, classifier.y_test, "de test")
 
     # Utilisation de la classe TextClassifier pour entraîner le modèle
-    #classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
+
 
     # Ajustement des hyperparamètres sur l'ensemble de validation
     alphas = [0.1, 0.5, 1.0, 1.5, 2.0]  # Vous pouvez ajuster cette liste d'hyperparamètres

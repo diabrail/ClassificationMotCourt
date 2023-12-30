@@ -36,8 +36,8 @@ class TextClassifier:
         # Prétraitement du tweet (nettoyage, lemmatisation, etc.) si nécessaire
 
         # Utilisez le modèle pour classer le tweet
-        tweet_tfidf = self.vectorizer.transform([tweet])
-        prediction = self.classifier.predict(tweet_tfidf)
+        #tweet_tfidf = self.vectorizer.transform([tweet])
+        prediction = self.classifier.predict(tweet)
 
         # Retournez le résultat de la classification
         return prediction[0]

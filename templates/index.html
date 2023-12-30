@@ -48,6 +48,9 @@
                         <span>APOLITIQUE</span>    
                     </div>
                 </div>
+                 <h1>Text Classification Result</h1>
+    <p>Input Tweet: {{ tweet }}</p>
+    <p>Classification Result: {{ result }}</p>
                 
 
             </div>
@@ -62,18 +65,18 @@
         apolitiqueDiv.style.display = 'none';
         politiqueDiv.style.display = 'none';
         function toggleApolitique() {
-            
+
             var po = 1;
-            var apo = 0;
+            var apo = 1;
             if(po == 0){
                 politiqueDiv.style.display = 'block';
-                
+
             }
             if(apo == 0){
                 apolitiqueDiv.style.display = 'block';
-                
+
             }
-            
+
         }
     </script>
     

@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
 class TextRepresentation:
-    def __init__(self, df):
+    def __init__(self, df=None):
         self.df = df
 
     def tfidf_representation(self):
@@ -16,4 +16,11 @@ class TextRepresentation:
         X_test_tfidf = tfidf_vectorizer.transform(X_test)
 
         return X_train_tfidf, X_test_tfidf, y_train, y_test
+
+    def _create_tfidf_vectors(self, X_train):
+        print("-----------------create_tfidf_vectors---------------")
+        # Création d'un vecteur TF-IDF
+        tfidf_vectorizer = TfidfVectorizer(max_features=5000)
+        X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
+        return X_train_tfidf
 
