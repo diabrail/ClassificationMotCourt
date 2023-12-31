@@ -85,8 +85,8 @@ if __name__ == '__main__':
 
     # Prétraitement du nouveau tweet (à adapter en fonction de votre prétraitement)
     new_tweet = "Hannity and Bachman on Health Care Bill - CENTRAL IOWA 912 PROJECT http://ow.ly/yNd"
-    #new_tweet = preprocessor.tokenize_text(new_tweet)
-    #new_tweet = preprocessor.lemmatize_text(new_tweet)
+    new_tweet = preprocessor.tokenize_text(new_tweet)
+    new_tweet = preprocessor.lemmatize_text(new_tweet)
     print("best_classifier nexxx-------------------------------------------------")
     predicted_class = classifier.classify(new_tweet)
 
