@@ -80,17 +80,19 @@ if __name__ == '__main__':
     print("----------------------Évaluer le classificateur sur l'ensemble de test -------------------------")
     #classifier.evaluate_classifier(classifier.X_test, classifier.y_test, "de test")
 
-    # Utilisation de la classe TextClassifier pour entraîner le modèle
-    print("best_classifier nexxx-------------------------------------------------")
+    # Créez une instance de la classe TextClassifier avec le vectorizer approprié
 
-    # Prétraitement du nouveau tweet (à adapter en fonction de votre prétraitement)
-    new_tweet = "Hannity and Bachman on Health Care Bill - CENTRAL IOWA 912 PROJECT http://ow.ly/yNd"
-    new_tweet = preprocessor.tokenize_text(new_tweet)
-    new_tweet = preprocessor.lemmatize_text(new_tweet)
-    print("best_classifier nexxx-------------------------------------------------")
-    predicted_class = classifier.classify(new_tweet)
+    classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
+    classifier.train_classifier(X_train, y_train)
 
-    print(f"Le nouveau tweet est classé dans la catégorie : {predicted_class}")
+    # Évaluez le classificateur sur l'ensemble de test
+    #classifier.evaluate_classifier(X_test, y_test, "de test")
+
+    # Classez un tweet
+    tweet = "@RajeevMasand I like to ask challenging and unique q's ones that can them thinking about the diaspora. Please tweet if KJo comes on..A MUST!"
+    classification_result = classifier.classify(tweet)
+
+    print(f"Classification du tweet : {classification_result}")
 
     # Ajustement des hyperparamètres sur l'ensemble de validation
     alphas = [0.1, 0.5, 1.0, 1.5, 2.0]  # Vous pouvez ajuster cette liste d'hyperparamètres
