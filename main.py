@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     # Évaluer le classificateur sur l'ensemble d'entraînement
     print("----------------------Évaluer le classificateur sur l'ensemble d'entraînement -------------------------")
-    classifier.evaluate_classifier(classifier.X_train, y_train, "d'entraînement")
+    #classifier.evaluate_classifier(classifier.X_train, y_train, "d'entraînement")
 
     # Évaluer le classificateur sur l'ensemble de validation
     print("----------------------Évaluer le classificateur sur l'ensemble de validation -------------------------")
@@ -78,10 +78,19 @@ if __name__ == '__main__':
 
     # Évaluer le classificateur sur l'ensemble de test
     print("----------------------Évaluer le classificateur sur l'ensemble de test -------------------------")
-    classifier.evaluate_classifier(classifier.X_test, classifier.y_test, "de test")
+    #classifier.evaluate_classifier(classifier.X_test, classifier.y_test, "de test")
 
     # Utilisation de la classe TextClassifier pour entraîner le modèle
+    print("best_classifier nexxx-------------------------------------------------")
 
+    # Prétraitement du nouveau tweet (à adapter en fonction de votre prétraitement)
+    new_tweet = "Hannity and Bachman on Health Care Bill - CENTRAL IOWA 912 PROJECT http://ow.ly/yNd"
+    #new_tweet = preprocessor.tokenize_text(new_tweet)
+    #new_tweet = preprocessor.lemmatize_text(new_tweet)
+    print("best_classifier nexxx-------------------------------------------------")
+    predicted_class = classifier.classify(new_tweet)
+
+    print(f"Le nouveau tweet est classé dans la catégorie : {predicted_class}")
 
     # Ajustement des hyperparamètres sur l'ensemble de validation
     alphas = [0.1, 0.5, 1.0, 1.5, 2.0]  # Vous pouvez ajuster cette liste d'hyperparamètres
@@ -105,7 +114,7 @@ if __name__ == '__main__':
     final_classifier = classifier.train_classifier(alpha=best_alpha)
 
     # Évaluer le modèle sur l'ensemble de test
-    classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
+    #classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
 
     # Utilisation de la classe TextClassifier pour entraîner le modèle
     classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
@@ -133,7 +142,7 @@ if __name__ == '__main__':
 
 
     # Évaluer le modèle sur l'ensemble de test
-    classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
+    #classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
 
     # Utilisation de la classe TextClassifier pour entraîner le modèle avec recherche par grille
     classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
@@ -145,7 +154,7 @@ if __name__ == '__main__':
     best_classifier = classifier.grid_search(param_grid)
 
     # Évaluer le modèle avec les meilleurs hyperparamètres sur l'ensemble de test
-    classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
+    #classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
 
     # Utilisation de la classe TextClassifier pour entraîner le modèle avec recherche par grille
     classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
@@ -157,9 +166,10 @@ if __name__ == '__main__':
     best_classifier = classifier.grid_search(param_grid)
 
     # Évaluer le modèle avec les meilleurs hyperparamètres sur l'ensemble de test
-    classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
+    #classifier.evaluate_classifier(X_test_tfidf, y_test, "de test")
 
     # Analyser les erreurs du modèle sur l'ensemble de test
-    classifier.analyze_errors(X_test_tfidf, y_test, "de test")
+    #classifier.analyze_errors(X_test_tfidf, y_test, "de test")
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

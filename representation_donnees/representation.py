@@ -17,10 +17,10 @@ class TextRepresentation:
 
         return X_train_tfidf, X_test_tfidf, y_train, y_test
 
-    def _create_tfidf_vectors(self, X_train):
+    def tfidf_vectors_representation(self, X_train):
         print("-----------------create_tfidf_vectors---------------")
         # Création d'un vecteur TF-IDF
         tfidf_vectorizer = TfidfVectorizer(max_features=5000)
-        X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
+        X_train_tfidf = vectorizer.transform(X_train)
         return X_train_tfidf
 

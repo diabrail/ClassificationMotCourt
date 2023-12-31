@@ -1,3 +1,4 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.naive_bayes import MultinomialNB
 
@@ -10,6 +11,7 @@ class TextClassifier:
         self.y_train = y_train
         self.y_validation = y_validation
         self.y_test = y_test
+        self.vectorizer = TfidfVectorizer()  # Ajout du vectorizer
         self.classifier = MultinomialNB()
 
     def train_classifier(self, X_train, y_train):
@@ -36,8 +38,7 @@ class TextClassifier:
         # Prétraitement du tweet (nettoyage, lemmatisation, etc.) si nécessaire
 
         # Utilisez le modèle pour classer le tweet
-        #tweet_tfidf = self.vectorizer.transform([tweet])
-        prediction = self.classifier.predict(tweet)
-
+        tweet_tfidf = self.vectorizer.transform([tweet])
+        prediction = self.classifier.predict(tweet_tfidf)
         # Retournez le résultat de la classification
         return prediction[0]
