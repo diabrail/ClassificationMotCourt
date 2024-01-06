@@ -61,6 +61,19 @@ if __name__ == '__main__':
     print("Shape of X_train:", X_train.shape)
     print("Shape of X_val:", X_val.shape)
     print("Shape of X_test:", X_test.shape)
+
+    # Utilisation de la classe TextClassifier pour entraîner le modèle
+    classifier = TextClassifier(X_train_tfidf, X_val, X_test_tfidf, y_train, y_val, y_test)
+    classifier.train_classifier(X_train, y_train)
+
+    # Évaluer le classificateur sur l'ensemble de test
+    classifier.evaluate_classifier(X_test, y_test, "de test")
+
+    # Classer un tweet
+    tweet = "And he doesn't even get paid to be funny: RT @QueenofSpain SC GOP'r likens Michelle Obama to escaped gorilla. http://tinyurl.com/kogvbc"
+    classification_result = classifier.classify(tweet)
+
+    print(f"Classification du tweet : {classification_result}")
     print("----------------------TextClassifier -------------------------")
     classifier = TextClassifier(X_train, X_val, X_test, y_train, y_val, y_test)
     print("----------------------Entrainement TextClassifier -------------------------")
